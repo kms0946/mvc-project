@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.tukorea.msweb.mapper.memberMapper">
+	<select id="getTime" resultType="string">
+ 		select now()
+ 	</select>
+ 	
+ 	<insert id="register">
+  		insert into admin_free(id,pw,name)
+  		 values(#{id}, #{pw}, #{name})
+
+  	</insert>
+    <!-- 로그인 -->
+      <select id="login" parameterType="AdminVO" resultType="org.tukorea.msweb.domain.AdminVO">
+      	select id,pw from admin_free where id = #{id} and pw = #{pw}
+      </select>
+ 	
+     <insert id="insert"> 
+   		insert into member_free (id, passwd, username, email) values
+ 		(#{id}, #{passwd}, #{username}, #{email})
+     </insert> 
+ 	
+     <select id="selectByid" resultType="MemberVO">
+ 		select * from member_free where id = #{id}
+     </select>
+      <select id="selectByid2" resultType="AdminVO">
+ 		select * from admin_free where id = #{id}
+     </select>
+ 	
+     <select id="selectAll" resultType="org.tukorea.msweb.domain.MemberVO">
+     <![CDATA[
+ 		select * from member_free
+      ]]> 
+     </select>
+ 	
+     <update id="update">
+	 	update member_free set id =#{id}, passwd =#{passwd}, username =#{username}, email =#{email} 
+		 where id = #{id}
+    </update>
+ 
+    <delete id="delete">
+		delete from member_free where id = #{id}
+    </delete>
+
+</mapper>  
+
